@@ -1,3 +1,5 @@
+from setup1 import *
+
 metadata = pkg.get_metadata(metadata_path)
 
 #Visualize data
@@ -37,25 +39,25 @@ coffee_y_train = y_train[y_train=='DrinkingCoffee']
 mirror_y_train = y_train[y_train=='UsingMirror']
 
 #UsingRadio images
-for i in range(500,520):
+for i in range(500,505):
   image = radio_X_train[i]
   image_label = radio_y_train[i]
   plot_one_image(image, labels=[image_label])
 
 #DrinkingCoffee images
-for i in range(500,520):
+for i in range(500,505):
   image = coffee_X_train[i]
   image_label = coffee_y_train[i]
   plot_one_image(image, labels=[image_label])
 
 #UsingMirror images
-for i in range(500,520):
+for i in range(500,505):
   image = mirror_X_train[i]
   image_label = mirror_y_train[i]
   plot_one_image(image, labels=[image_label])
 
 #Attentive images
-for i in range(500,520):
+for i in range(500,505):
   image = attentive_X_train[i]
   image_label = attentive_y_train[i]
   plot_one_image(image, labels=[image_label])

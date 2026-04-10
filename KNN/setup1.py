@@ -208,8 +208,16 @@ metadata_path        = './metadata.csv'
 image_shape          = (64, 64, 3)
 
 ###
-!wget -q --show-progress 'https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/metadata.csv'
-!wget -q --show-progress 'https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/image_data.npy'
+import urllib.request, os
+
+def _download(url, dest):
+    if not os.path.exists(dest):
+        print(f'Downloading {dest}...')
+        urllib.request.urlretrieve(url, dest)
+        print(f'Done.')
+
+_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/metadata.csv', './metadata.csv')
+_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/image_data.npy', './image_data.npy')
 
 
 ### pre-loading all data of interest
