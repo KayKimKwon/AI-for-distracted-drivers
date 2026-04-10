@@ -175,8 +175,10 @@ class helpers:
       label = labels[index]
 
     # plot image of interest
-    print('Label: %s'%label)
+    label = str(label).replace("[","").replace("\'","").replace("]","")
+    print('Label: ', label)
     plt.imshow(image)
+    plt.text(0.5,0,label) # it is at the top of the image graph, hmmmm 
     plt.show()
 
   def plot_acc(history, ax = None, xlabel = 'Epoch #'):

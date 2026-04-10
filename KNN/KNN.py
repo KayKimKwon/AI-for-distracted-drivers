@@ -4,9 +4,15 @@ metadata = pkg.get_metadata(metadata_path)
 
 #Visualize data
 sns.countplot(x = 'class', data = metadata)
+plt.show()
+
 metadata.info()
 sns.countplot(x = 'split', data = metadata)
+plt.show()
+
 sns.countplot(x = 'split', hue = 'class', data = metadata)
+plt.show()
+
 
 #training
 X_train, y_train = get_train_data()
