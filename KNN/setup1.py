@@ -205,8 +205,8 @@ class helpers:
 
 ### defining project variables
 # file variables
-image_data_path      = './image_data.npy'
-metadata_path        = './metadata.csv'
+image_data_path      = '../data/image_data.npy'
+metadata_path        = '../data/metadata.csv'
 image_shape          = (64, 64, 3)
 
 ###
@@ -218,8 +218,8 @@ def _download(url, dest):
         urllib.request.urlretrieve(url, dest)
         print(f'Done.')
 
-_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/metadata.csv', './metadata.csv')
-_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/image_data.npy', './image_data.npy')
+_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/metadata.csv', metadata_path)
+_download('https://storage.googleapis.com/inspirit-ai-data-bucket-1/Data/AI%20Scholars/Sessions%206%20-%2010%20(Projects)/Project%20-%20Driver%20Distraction%20Detection/image_data.npy', image_data_path)
 
 
 ### pre-loading all data of interest
