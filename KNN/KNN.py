@@ -3,16 +3,17 @@ from setup1 import *
 metadata = pkg.get_metadata(metadata_path)
 
 #Visualize data
-sns.countplot(x = 'class', data = metadata)
-plt.show()
+# sns.countplot(x = 'class', data = metadata)
+# plt.show()
 
-metadata.info()
-sns.countplot(x = 'split', data = metadata)
-plt.show()
+# metadata.info()
+# sns.countplot(x = 'split', data = metadata)
+# plt.show()
 
-sns.countplot(x = 'split', hue = 'class', data = metadata)
-plt.show()
+# sns.countplot(x = 'split', hue = 'class', data = metadata)
+# plt.show()
 
+numImages = int(input("Enter number of images to analyze: "))
 
 #training
 X_train, y_train = get_train_data()
@@ -23,14 +24,25 @@ image_label = y_train[0] #this gets the first label in our train_labels array
 image = image.reshape(64, 64, 3)
 print('Our image is stored as %s in Python'%type(image))
 print('Our image has dimensions of (%d, %d, %d)'%image.shape)
-print('Our image has label %s'%image_label)
+# print('Our image has label %s'%image_label)
 
-plot_one_image(image, labels=[image_label])
+# plot_one_image(image, labels=[image_label])
+
+# Censor rectangle dimensions, can be modified
+start_row = 10
+stop_row = 30
+start_col = 15
+stop_col = 30
+new_color = [0, 0, 0]
+
 
 #customizable for about 7700 images, shows image and label
-for i in range(0,7000,1200):
-  image = X_train[i]
-  image_label = y_train[i]
+for i in range(numImages):
+  k = np.random.randint(0, len(X_train))
+  image = X_train[k]
+  image = image.reshape(64, 64, 3)
+  image_label = y_train[k]
+  image[start_row:stop_row, start_col:stop_col] = new_color
   plot_one_image(image, labels=[image_label])
 
 #Visual differences between images
@@ -44,61 +56,43 @@ attentive_y_train = y_train[y_train=='Attentive'] #etc.
 coffee_y_train = y_train[y_train=='DrinkingCoffee']
 mirror_y_train = y_train[y_train=='UsingMirror']
 
-#UsingRadio images
-for i in range(500,505):
-  image = radio_X_train[i]
-  image_label = radio_y_train[i]
-  plot_one_image(image, labels=[image_label])
+# #UsingRadio images
+# for i in range(500,505):
+#   image = radio_X_train[i]
+#   image_label = radio_y_train[i]
+#   plot_one_image(image, labels=[image_label])
 
-#DrinkingCoffee images
-for i in range(500,505):
-  image = coffee_X_train[i]
-  image_label = coffee_y_train[i]
-  plot_one_image(image, labels=[image_label])
+# #DrinkingCoffee images
+# for i in range(500,505):
+#   image = coffee_X_train[i]
+#   image_label = coffee_y_train[i]
+#   plot_one_image(image, labels=[image_label])
 
-#UsingMirror images
-for i in range(500,505):
-  image = mirror_X_train[i]
-  image_label = mirror_y_train[i]
-  plot_one_image(image, labels=[image_label])
+# #UsingMirror images
+# for i in range(500,505):
+#   image = mirror_X_train[i]
+#   image_label = mirror_y_train[i]
+#   plot_one_image(image, labels=[image_label])
 
-#Attentive images
-for i in range(500,505):
-  image = attentive_X_train[i]
-  image_label = attentive_y_train[i]
-  plot_one_image(image, labels=[image_label])
+# #Attentive images
+# for i in range(500,505):
+#   image = attentive_X_train[i]
+#   image_label = attentive_y_train[i]
+#   plot_one_image(image, labels=[image_label])
 
 
 ### Color matrices
+# new_image = image.copy()
 
-image = image.reshape(64, 64, 3)
-new_image = image.copy()
+# new_image[:, :, 0] = 1 #RGB
+# new_image[:, :, 1] = 0
+# plot_one_image(new_image, labels=[image_label])
 
-new_image[:, :, 0] = 1 #RGB
-new_image[:, :, 1] = 0
-plot_one_image(new_image, labels=[image_label])
+# #croppiing
+# rect_image = image.copy()
+# image[5,5]
+# image[5,5,0] #for red color
 
-#croppiing
-rect_image = image.copy()
-image[5,5]
-image[5,5,0] #for red color
-
-#rectangle to maintain privacy
-new_image = np.copy(image)
-
-# experimenting rows and columns, can be modified
-start_row = 10
-stop_row = 28
-start_col = 15
-stop_col = 27
-
-# red color
-new_color = [1, 0, 0]
-
-# Use slicing to draw a rectangle
-new_image[start_row:stop_row, start_col:stop_col] = new_color
-
-plot_one_image(new_image, labels=[image_label])
 
 
 #Machine learning KNN
@@ -107,7 +101,7 @@ plot_one_image(new_image, labels=[image_label])
 (X_test, y_test) = get_test_data(flatten=True)
 
 
-knn = KNeighborsClassifier(n_neighbors = 3) #change n value and check for accuracy. I used 3 
+knn = KNeighborsClassifier(n_neighbors = 7) #change n value and check for accuracy. I used 3 
 knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)
-print(accuracy_score(y_test, y_pred))
+print('Accuracy: ', accuracy_score(y_test, y_pred))
