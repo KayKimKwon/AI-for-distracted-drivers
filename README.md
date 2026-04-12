@@ -24,4 +24,4 @@ pip install numpy pandas seaborn matplotlib scikit-learn
 Data is downloaded automatically when running the script.
 
 ## Credits
-Original project structure and setup code provided by instructors at Inspirit AI.
+Original project structure and setup code provided by instructors at NSLC summer camp 2024.

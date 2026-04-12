@@ -1,1 +1,3 @@
 KNN/image_data.npy
+data/image_data.npy
+__pycache__/
